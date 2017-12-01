@@ -140,13 +140,13 @@ public class Test {
     public static void main(String[] argv) throws TestFailedException {
         // Construct three new list instances
         IList<Integer> arrayList  = new ArrayList<Integer>();
-        //IList<Integer> singleList = new SingleLinkList<Integer>();
-        //IList<Integer> doubleList = new DoubleLinkList<Integer>();
+        IList<Integer> singleList = new SingleLinkList<Integer>();
+        IList<Integer> doubleList = new DoubleLinkList<Integer>();
         
         // Run the tests on each list implementation
         runTest(arrayList, 105);
-        //runTest(singleList, 105);
-        //runTest(doubleList, 105);
+        runTest(singleList, 105);
+        runTest(doubleList, 105);
     }
     
     public static void debugPrint(IList l) {

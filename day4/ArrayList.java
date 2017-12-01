@@ -1,8 +1,11 @@
+//for discriptions of methods, see IList
+
 public class ArrayList<T> implements IList<T> {
 	T[] ls;
 	int size;
 	int curr;
 
+	//constructor, list of generic type T
 	public ArrayList() {
 		ls = (T[]) new Object[0];
 		int size = 0;
@@ -34,6 +37,7 @@ public class ArrayList<T> implements IList<T> {
 		templs[size] = v;
 		ls = templs;
 		size += 1;
+		//move curr to the end
 		curr = size-1;
 	}
 
@@ -50,6 +54,7 @@ public class ArrayList<T> implements IList<T> {
 		}
 		ls = templs;
 		size -=1;
+		//if possible, move curr to the previous item
 		if (curr != 0) {
 			curr -= 1;
 		}
@@ -73,6 +78,7 @@ public class ArrayList<T> implements IList<T> {
 	public void move(int sidx, int didx) {
 		T[] templs = (T[]) new Object[size];
 		T sitem = ls[sidx];
+		//remove the scourse item
 		for (int i = 0; i < size-1; i ++) {
 			if (i < sidx) {
 				templs[i] = ls[i];
@@ -82,6 +88,7 @@ public class ArrayList<T> implements IList<T> {
 			}
 		}
 		ls = templs;
+		//add the source item
 		templs = (T[]) new Object[size];
 		for (int i = 0; i < size; i++) {
 			if (i < didx) {
