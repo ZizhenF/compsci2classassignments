@@ -7,7 +7,7 @@ public class Test {
      * Note: This test method has only been tested for n>=10... Small values of 
      *       n might fail due to bugs in runTest rather than bugs in the List
      */
-    public static void runTest(IList list, int n) throws TestFailedException {
+    public static void runTest(IList<Integer> list, int n) throws TestFailedException {
         boolean test_failed = false;
         int s; // temp value to support some tests
         
@@ -140,13 +140,13 @@ public class Test {
     public static void main(String[] argv) throws TestFailedException {
         // Construct three new list instances
         IList<Integer> arrayList  = new ArrayList<Integer>();
-        IList<Integer> singleList = new SingleLinkList<Integer>();
-        IList<Integer> doubleList = new DoubleLinkList<Integer>();
+        //IList<Integer> singleList = new SingleLinkList<Integer>();
+        //IList<Integer> doubleList = new DoubleLinkList<Integer>();
         
         // Run the tests on each list implementation
         runTest(arrayList, 105);
-        runTest(singleList, 105);
-        runTest(doubleList, 105);
+        //runTest(singleList, 105);
+        //runTest(doubleList, 105);
     }
     
     public static void debugPrint(IList l) {
