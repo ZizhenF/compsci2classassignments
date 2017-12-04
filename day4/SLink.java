@@ -3,8 +3,8 @@ public class SLink<T> implements ISLink<T> {
 	SLink<T> next;  //points to the next cell
 
 	public SLink(T _val, SLink<T> _next) {
-		this.val = _val;
-		this.next = _next;
+		val = _val;
+		next = _next;
 	}
 
 	public T getValue() {

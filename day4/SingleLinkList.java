@@ -1,75 +1,112 @@
 public class SingleLinkList<T> implements IList<T> {
-
-	ISLink<T> curr;
-	ISLink<T> tail;
 	ISLink<T> head;
+	ISLink<T> tail;
+	ISLink<T> curr;
 	int size;
 
-
-	//constructor, only creates an empty pointer
 	public SingleLinkList() {
-		curr = tail = head = new SLink<T>(null, null); //got this idea from the textbook
+		head = new SLink(null, null);
+		tail = head;
+		curr = head;
 		size = 0;
 	}
 
-	public void append(T v) {
-		//create a new link
-		ISLink<T> appL = new SLink<T>(v, null);
-		//add the pointer to the current tail
-		tail.setNext(appL);
-		//move tail and curr, add to size
-		tail = appL;
-		curr = appL;
-		size += 1;
-		if (size == 1) {
-			head = appL;
+	public void insert(int idx, T v) {
+		//find the item right before the indexed
+		ISLink<T> currloc = head;
+		for (int i = 0; i < idx; i++) {
+			currloc = currloc.getNext();
 		}
+		//set nexts;
+		ISLink<T> curr_indexed = currloc.getNext();
+		ISLink<T> newitem = new SLink(v, (SLink<T>) curr_indexed);
+		currloc.setNext(newitem);
+		size++;
+	}
+
+	public void append(T v) {
+		ISLink<T> newitem = new SLink(v, null);
+		tail.setNext(newitem);
+		tail = newitem;
+		curr = tail;
+		size++;
 	}
 
 	public void remove() {
-		//a loop to find the item before curr
-		boolean indicator = true;
-		ISLink<T> prevloc = new SLink(null, null);
+		boolean iftail = false;
+		boolean iffirst = false;
+		if (curr == tail) {
+			iftail = true;
+		}
+		if (curr == head.getNext()) {
+			iffirst = true;
+		}
+		//find the item before curr
+		ISLink<T> prevloc = head;
 		ISLink<T> currloc = head;
-		while (indicator) {
+		boolean notfound = true;
+		while (notfound) {
 			prevloc = currloc;
 			currloc = currloc.getNext();
 			if (currloc == curr) {
-				indicator = false;
-			}  //note here the prevloc is just an aliase of the actual link storage 
+				notfound = false;
+			}
 		}
-		//reset the pointer
-		prevloc.setNext(curr.getNext());
-		if (curr == tail) {tail = prevloc;}
-		curr = prevloc;
+		//remove
+		if (iftail) {
+			prevloc.setNext(null);
+			tail = prevloc;
+		}
+		else {
+			prevloc.setNext(curr.getNext());
+		}
+		curr.setValue(null);
+		curr.setNext(null);
+		// avoid going into the real null head!!!!!!
+		if (iffirst) {
+			curr = prevloc.getNext();
+		}
+		else {
+			curr = prevloc;
+		}
 		size--;
 	}
 
 	public void remove(int idx) {
-		//a loop to find the item before idx
+		boolean iftail = false;
+		if (idx == size-1) {
+			iftail = true;
+		}
+		//find the item before idx
 		ISLink<T> currloc = head;
-		for (int i=0; i<idx-1; i++) {
+		for (int i = 0; i < idx; i++) {
 			currloc = currloc.getNext();
-		}  //the resulted currloc is actually the previous loc before idx
-		if (currloc.getNext() == curr) {curr = currloc;}
-		else if (currloc.getNext() == tail) {tail = currloc;}
-		currloc.setNext((currloc.getNext()).getNext());
+		}
+		ISLink<T> idxloc = currloc.getNext();
+		//remove
+		if (curr == idxloc) {
+			curr = currloc;
+		}
+		if (iftail) {
+			currloc.setNext(null);
+			tail = currloc;
+		}
+		else {
+			currloc.setNext(idxloc.getNext());
+		}
+		idxloc.setValue(null);
+		idxloc.setNext(null);
 		size--;
 	}
 
-	public void insert(int idx, T v) {
-		//find the previous
-		ISLink<T> currloc = head;
-		for (int i=0; i<idx; i++) {
-			currloc = currloc.getNext();
+	public void move(int sidx, int didx) {
+		ISLink<T> si = head;
+		for (int i = 0; i <= sidx; i++) {
+			si = si.getNext();
 		}
-		//create new link
-		ISLink<T> ins = (ISLink<T>) new SLink<T>(v, (SLink<T>) currloc.getNext());
-		//change the tail/head if needed, reset the pointer of the prev
-		if (currloc == tail) {tail = ins;}
-		if (idx == 0) {head = ins;}
-		currloc.setNext(ins);
-		size++;
+		T sv = si.getValue();
+		this.remove(sidx);
+		this.insert(didx, sv);
 	}
 
 	public T fetch() {
@@ -78,34 +115,32 @@ public class SingleLinkList<T> implements IList<T> {
 
 	public T fetch(int idx) {
 		ISLink<T> currloc = head;
-		for (int i=0; i<idx; i++) {
+		for (int i = 0; i <= idx; i++) {
 			currloc = currloc.getNext();
 		}
 		return currloc.getValue();
 	}
 
-	public void move(int sidx, int didx) {
-		T tarVal = this.fetch(sidx);
-		this.remove(sidx);
-		this.insert(didx, tarVal);
-	}
-
 	public void next() {
-		curr = curr.getNext();
+		if (curr != tail) {
+			curr = curr.getNext();
+		}
 	}
 
 	public void prev() {
-		boolean indicator = true;
-		ISLink<T> prevloc = tail;
-		ISLink<T> currloc = head;
-		while (indicator) {
-			prevloc = currloc;
-			currloc = currloc.getNext();
-			if (currloc == curr) {
-				indicator = false;
-			}
+		if ((curr != head)&(curr != head.getNext())) {
+			boolean notfound = true;
+			ISLink<T> prevloc = head;
+			ISLink<T> currloc = head;
+			while (notfound) {
+				prevloc = currloc;
+				currloc = currloc.getNext();
+				if (currloc == curr) {
+					notfound = false;
+				}
+ 			}
+ 			curr = prevloc;
 		}
-		curr = prevloc;
 	}
 
 	public void jumpToTail() {
@@ -113,7 +148,7 @@ public class SingleLinkList<T> implements IList<T> {
 	}
 
 	public void jumpToHead() {
-		curr = head;
+		curr = head.getNext();
 	}
 
 	public int size() {
