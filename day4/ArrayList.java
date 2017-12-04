@@ -14,7 +14,7 @@ public class ArrayList<T> implements IList<T> {
 
 	public void insert(int idx, T v) {
 		T[] templs = (T[]) new Object[size+1];
-		for (int i=0; i<size; i++) {
+		for (int i=0; i<=size; i++) {
 			if (i < idx) {
 				templs[i] = ls[i];
 			}
@@ -77,7 +77,7 @@ public class ArrayList<T> implements IList<T> {
 
 	public void move(int sidx, int didx) {
 		T[] templs = (T[]) new Object[size];
-		T sitem = ls[sidx];
+		T sval = ls[sidx];
 		//remove the scourse item
 		for (int i = 0; i < size-1; i ++) {
 			if (i < sidx) {
@@ -88,14 +88,15 @@ public class ArrayList<T> implements IList<T> {
 			}
 		}
 		ls = templs;
-		//add the source item
+
+		// add the source item
 		templs = (T[]) new Object[size];
 		for (int i = 0; i < size; i++) {
 			if (i < didx) {
 				templs[i] = ls[i];
 			}
 			else if (i == didx) {
-				templs[i] = sitem;
+				templs[i] = sval;
 			}
 			else if (i > didx) {
 				templs[i] = ls[i-1];

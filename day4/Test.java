@@ -82,6 +82,7 @@ public class Test {
             throw new TestFailedException("Incorrect content after moves");
         }
         System.out.println("F");
+
         
         // Quick sanity check insert/remove
         list.insert(n/2, -42);
@@ -90,6 +91,7 @@ public class Test {
             debugPrint(list);
             throw new TestFailedException("Incorrect content by after insert by index");
         }
+        
         list.remove(n/2);
         if(list.fetch(n/2) != n/2) { test_failed=true; }
         if(test_failed) {
@@ -97,6 +99,7 @@ public class Test {
             throw new TestFailedException("Incorrect content by after insert by index");
         }
         System.out.println("G");
+
         
         // remove half the elements with index calls
         for(int i=1; i<n/2; i++) {
@@ -125,6 +128,7 @@ public class Test {
         for(int i=0; i<n/4-1; i++) {
             if(list.fetch(i) != 2+i*4) { test_failed=true; }
         }
+
         // Check the size and order
         if(test_failed) {
             debugPrint(list);

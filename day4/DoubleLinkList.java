@@ -47,6 +47,7 @@ public class DoubleLinkList<T> implements IList<T> {
 		}
 		if (curr == tail) {
 			IDLink<T> prevcurr = curr.getPrev();
+			//collect garbage
 			prevcurr.setNext(null);
 			curr.setValue(null);
 			curr.setNext(null);

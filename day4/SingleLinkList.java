@@ -60,6 +60,7 @@ public class SingleLinkList<T> implements IList<T> {
 		else {
 			prevloc.setNext(curr.getNext());
 		}
+		// collect garbage
 		curr.setValue(null);
 		curr.setNext(null);
 		// avoid going into the real null head!!!!!!
@@ -94,6 +95,7 @@ public class SingleLinkList<T> implements IList<T> {
 		else {
 			currloc.setNext(idxloc.getNext());
 		}
+		// collect garbage
 		idxloc.setValue(null);
 		idxloc.setNext(null);
 		size--;
