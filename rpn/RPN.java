@@ -7,8 +7,8 @@ public class RPN {
             System.out.println("Usage: java RPN <token> ...");
             return;
         }
-        IQueue<RPNToken> tokens = new RingQueue<RPNToken>(100);
-        IStack<Double> stack  = new LinkStack<Double>(100);
+        IQueue<RPNToken> tokens = new Queue<RPNToken>(100);
+        IStack<Double> stack  = new Stack<Double>(100);
         RPNCore core  = new RPNCore();
         
         for(int i=0; i<argv.length; i++) {
