@@ -28,7 +28,5 @@ OverFlowException.java      - Exception for over filling a data structure
 UnderFlowException.java     - Exception for over emptying a data structure
 BadExpressionException.java - Exception for leftover tokens in the calculator
 UnknownOpException.java     - Exception for using an unknown operator
-RingQueue.class      - A compiled ring queue
-LinkStack.class      - A compiled link based stack
-LinkStack$Link.class - A compiled link implementation for the stack
-
+Queue.java         - An array-based queue implements IQueue
+Stack.java         - An array-based stack implements IStack
