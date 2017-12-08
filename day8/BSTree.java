@@ -7,7 +7,10 @@ public class BSTree<K extends Comparable<K>,V> implements IDict<K, V> {
 
 	public V add(K k, V v) {
 		V currval = null;
-		currval = dict.fetch(k);
+		try{
+			currval = dict.fetch(k);
+		}
+		catch (java.lang.NullPointerException e) {}
 		DictItem<K, V> n = new DictItem(k, v);
 		dict.insert(k, v);
 		return currval;

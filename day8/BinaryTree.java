@@ -16,6 +16,7 @@ public class BinaryTree<K extends Comparable<K>,V> {
 	public void insert(K k, V v) {
 		if (root == null) {
 			root = new Node(k, v);
+			return;
 		}
 		curr = root;
 		helper(k, v);
@@ -62,6 +63,22 @@ public class BinaryTree<K extends Comparable<K>,V> {
 
 	//what if the curr is the root?
 	public void remove(K k) {
+		// special case: if curr is the root
+		if ((root.getKey()).compareTo(k)==0) {
+			Node<K, V> swapnode = root.getLeft();
+			Node<K, V> swapparent = root;
+			while (swapnode.getRight() != null) {
+				swapparent = swapnode;
+				swapnode = swapnode.getRight();
+			}	
+			swapnode.setRight(root.getRight());
+			swapnode.setLeft(root.getLeft());
+			swapparent.setRight(null);
+			root = swapnode;
+			size--;
+			return;
+		}
+
 		// find the node to remove
 		// use the code of fetch but also keep track of parent
 		Node<K, V> parent = root;
@@ -141,4 +158,19 @@ public class BinaryTree<K extends Comparable<K>,V> {
 		swapparent.setRight(null);
 		size--;
 	}
+
+	/*
+	public static void main(String[] args) {
+		BinaryTree<Integer,Integer> t = new BinaryTree<Integer,Integer>();
+		t.insert(17,17);
+		t.insert(20,20);
+		t.insert(25,25);
+		t.insert(18,18);
+		t.insert(1,1);
+		t.insert(21,21);
+		t.insert(22,22);
+		t.remove(17);
+		System.out.println(t.fetch(22));
+	}
+	*/
 }

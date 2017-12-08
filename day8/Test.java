@@ -26,13 +26,13 @@ public class Test {
             allwords[i]=words.fetch(idx);
             words.remove(idx);
             linear.add(allwords[i],i);
-            System.out.print(".");
             tree.add(allwords[i],i);
         }
         
         System.out.println("Timing 100,000 fetches");
         long s;
         long e;
+        
         rand.setSeed(0);
         s = System.currentTimeMillis();
         for(int i=0; i<100000; i++) {
