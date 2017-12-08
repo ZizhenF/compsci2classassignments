@@ -19,7 +19,7 @@ public class Test {
         // Add them to the dictionaries in random order
         String[] allwords = new String[words.size()];
         IDict<String,Integer> linear = new Dict<String,Integer>();
-        //IDict<String,Integer> tree   = new BSTree<String,Integer>();
+        IDict<String,Integer> tree   = new BSTree<String,Integer>();
         Random rand = new Random();
         for(int i=0; words.size()>0; i++) {
             int idx = rand.nextInt(words.size());
@@ -27,7 +27,7 @@ public class Test {
             words.remove(idx);
             linear.add(allwords[i],i);
             System.out.print(".");
-        //    tree.add(allwords[i],i);
+            tree.add(allwords[i],i);
         }
         
         System.out.println("Timing 100,000 fetches");
@@ -43,7 +43,7 @@ public class Test {
         }
         e = System.currentTimeMillis();
         System.out.println("Linear dict took "+(e-s)+"ms");
-        /*
+        
         rand.setSeed(0);
         s = System.currentTimeMillis();
         for(int i=0; i<100000; i++) {
@@ -54,6 +54,6 @@ public class Test {
         }
         e = System.currentTimeMillis();
         System.out.println("Tree dict took "+(e-s)+"ms");
-        */
+        
     }
 }
