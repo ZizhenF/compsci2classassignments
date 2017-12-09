@@ -31,7 +31,7 @@ public class BSTree<K extends Comparable<K>,V> implements IDict<K, V> {
 	}
 
 	public K[] keys() {
-		K[] kls = null;
-		return kls;
+		ArrayList<K> kls = dict.getKeys();
+		return kls.getarray();
 	}
 }

@@ -54,6 +54,5 @@ public class Test {
         }
         e = System.currentTimeMillis();
         System.out.println("Tree dict took "+(e-s)+"ms");
-        
     }
 }

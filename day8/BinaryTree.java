@@ -2,11 +2,13 @@ public class BinaryTree<K extends Comparable<K>,V> {
 	Node<K, V> curr;
 	Node<K, V> root;
 	int size;
+	ArrayList<K> kls;
 
 	public BinaryTree() {
 		root = null;
 		curr = null;
 		size = 0;
+		kls = new ArrayList<K>();
 	}
 
 	public int size() {
@@ -20,6 +22,7 @@ public class BinaryTree<K extends Comparable<K>,V> {
 		}
 		curr = root;
 		helper(k, v);
+		kls.append(k);
 		size++;
 	}
 
@@ -76,6 +79,7 @@ public class BinaryTree<K extends Comparable<K>,V> {
 			swapparent.setRight(null);
 			root = swapnode;
 			size--;
+			kls.remove(k);
 			return;
 		}
 
@@ -99,6 +103,7 @@ public class BinaryTree<K extends Comparable<K>,V> {
 				}
 			}
 		}
+		kls.remove(k);
 		// case1: no children, kill the node
 		if (curr.getLeft() == null && curr.getRight() == null) {
 			if (parent.getLeft() == curr) {
@@ -159,6 +164,11 @@ public class BinaryTree<K extends Comparable<K>,V> {
 		size--;
 	}
 
+	public ArrayList<K> getKeys() {
+		return kls;
+	}
+
+
 	/*
 	public static void main(String[] args) {
 		BinaryTree<Integer,Integer> t = new BinaryTree<Integer,Integer>();
@@ -169,8 +179,14 @@ public class BinaryTree<K extends Comparable<K>,V> {
 		t.insert(1,1);
 		t.insert(21,21);
 		t.insert(22,22);
+		t.insert(13,13);
+		t.insert(14,14);
+		t.insert(27,27);
+		t.insert(5,5);
+		t.remove(20);
 		t.remove(17);
-		System.out.println(t.fetch(22));
+		t.remove(27);
+		System.out.println(t.fetch(18));
 	}
 	*/
 }

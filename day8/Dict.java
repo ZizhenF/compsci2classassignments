@@ -1,8 +1,10 @@
 public class Dict<K extends Comparable<K>,V> implements IDict<K, V> {
 	IList<DictItem> dict;
+	ArrayList<K> kls;
 
 	public Dict() {
 		dict = (IList<DictItem>) new DoubleLinkList<DictItem>();
+		kls = new ArrayList<K>();
 
 	}
 
@@ -10,6 +12,7 @@ public class Dict<K extends Comparable<K>,V> implements IDict<K, V> {
 		V currval = this.fetch(k);
 		DictItem<K, V> n = new DictItem(k, v);
 		dict.append(n);
+		kls.append(k);
 		return currval;
 	}
 
@@ -24,6 +27,7 @@ public class Dict<K extends Comparable<K>,V> implements IDict<K, V> {
 				return currval;
 			}
 		}
+		kls.remove(k);
 		return null;
 	}
 
@@ -43,13 +47,7 @@ public class Dict<K extends Comparable<K>,V> implements IDict<K, V> {
 	}
 
 	public K[] keys() {
-		DictItem<K, V> curr;
-		K[] keyls = (K[]) new Object[dict.size()];
-		for (int i=0; i<dict.size(); i++) {
-			curr = dict.fetch(i);
-			keyls[i] = curr.getKey();
-		}
-		return keyls;
+		return kls.getarray();
 	}
 
 }
