@@ -18,6 +18,8 @@ public class BinaryTree<K extends Comparable<K>,V> {
 	public void insert(K k, V v) {
 		if (root == null) {
 			root = new Node(k, v);
+			kls.append(k);
+			size++;
 			return;
 		}
 		curr = root;
