@@ -6,7 +6,7 @@ Files:
 Test.java  - A program that reads in words and randomly searches for them
 IList.java - An interface for a list implementation (matches day4)
 IDict.java - An interface for dictionaries
-shortlist.txt - a 200 word list
+shortlist.txt - a 400 word list
 words_alpha.txt - a 370098 word list
 BinaryTree.java - A binary tree structure that BSTree is based on
 BSTree.java     - A binary search tree based dictionary
