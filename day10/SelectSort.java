@@ -22,9 +22,10 @@ public class SelectSort<T extends Comparable> implements ISort<T> {
 		return "Select Sort";
 	}
 
+	
 	/*
 	public static void main(String[] args) {
-		Integer[] ls = new Integer[10];
+		Integer[] ls = new Integer[9];
 		ls[0] = 3;
 		ls[1] = -11;
 		ls[2] = 9;
@@ -33,12 +34,11 @@ public class SelectSort<T extends Comparable> implements ISort<T> {
 		ls[5] = 16;
 		ls[6] = 15;
 		ls[7] = 40;
-		ls[8] = 52;
-		ls[9] = -10;
+		ls[8] = 88;
 		SelectSort<Integer> sortob = new SelectSort<Integer>();
 		sortob.sort(ls);
 
-		for (int i = 0; i<10; i++) {
+		for (int i = 0; i<9; i++) {
 			System.out.println(ls[i]);
 		}
 	}

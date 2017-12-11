@@ -20,14 +20,34 @@ public class MergeSort<T extends Comparable> implements ISort<T> {
 	}
 
 	public void merge(T[] ls, int s, int mid, int e) {
-		for (int i=s; i<=mid; i++) {
-			if (i<=mid && i<=e) {
-				if (ls[i].compareTo(ls[mid+i-s]) > 0) {
-					T swap = ls[mid+i-s];
-					ls[i] = ls[mid+i-s];
-					ls[mid+i-s] = ls[i];
-				}
+		T[] temp = (T[]) new Comparable[e-s+1];
+		int tempidx = 0;
+		int leftptr = s;
+		int rightptr = mid+1;
+		while (leftptr<=mid && rightptr<=e) {
+			if (ls[leftptr].compareTo(ls[rightptr])<0) {
+				temp[tempidx] = ls[leftptr];
+				tempidx++;
+				leftptr++;
 			}
+			else if (ls[leftptr].compareTo(ls[rightptr])>0) {
+				temp[tempidx] = ls[rightptr];
+				tempidx++;
+				rightptr++;
+			}
+		}
+		while (leftptr<=mid && rightptr>e) {
+			temp[tempidx] = ls[leftptr];
+			tempidx++;
+			leftptr++;
+		}
+		while (rightptr<=e && leftptr>mid) {
+			temp[tempidx] = ls[rightptr];
+			tempidx++;
+			rightptr++;
+		}
+		for (int i = 0; i < temp.length; i++) {
+			ls[s+i] = temp[i];
 		}
 	}
 
@@ -38,7 +58,7 @@ public class MergeSort<T extends Comparable> implements ISort<T> {
 
 	/*
 	public static void main(String[] args) {
-		Integer[] ls = new Integer[10];
+		Integer[] ls = new Integer[8];
 		ls[0] = 3;
 		ls[1] = -11;
 		ls[2] = 9;
@@ -47,14 +67,13 @@ public class MergeSort<T extends Comparable> implements ISort<T> {
 		ls[5] = 16;
 		ls[6] = 15;
 		ls[7] = 40;
-		ls[8] = 52;
-		ls[9] = -10;
-		SelectSort<Integer> sortob = new SelectSort<Integer>();
+		MergeSort<Integer> sortob = new MergeSort<Integer>();
 		sortob.sort(ls);
 
-		for (int i = 0; i<10; i++) {
+		for (int i = 0; i<8; i++) {
 			System.out.println(ls[i]);
 		}
 	}
 	*/
+	
 }
