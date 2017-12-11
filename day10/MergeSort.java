@@ -25,7 +25,7 @@ public class MergeSort<T extends Comparable> implements ISort<T> {
 		int leftptr = s;
 		int rightptr = mid+1;
 		while (leftptr<=mid && rightptr<=e) {
-			if (ls[leftptr].compareTo(ls[rightptr])<0) {
+			if (ls[leftptr].compareTo(ls[rightptr])<=0) {
 				temp[tempidx] = ls[leftptr];
 				tempidx++;
 				leftptr++;
@@ -56,9 +56,9 @@ public class MergeSort<T extends Comparable> implements ISort<T> {
 	}
 
 
-	/*
+	
 	public static void main(String[] args) {
-		Integer[] ls = new Integer[8];
+		Integer[] ls = new Integer[9];
 		ls[0] = 3;
 		ls[1] = -11;
 		ls[2] = 9;
@@ -67,13 +67,14 @@ public class MergeSort<T extends Comparable> implements ISort<T> {
 		ls[5] = 16;
 		ls[6] = 15;
 		ls[7] = 40;
+		ls[8] = 40;
 		MergeSort<Integer> sortob = new MergeSort<Integer>();
 		sortob.sort(ls);
 
-		for (int i = 0; i<8; i++) {
+		for (int i = 0; i<9; i++) {
 			System.out.println(ls[i]);
 		}
 	}
-	*/
+	
 	
 }
