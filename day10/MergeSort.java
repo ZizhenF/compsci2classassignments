@@ -56,7 +56,7 @@ public class MergeSort<T extends Comparable> implements ISort<T> {
 	}
 
 
-	
+	/*
 	public static void main(String[] args) {
 		Integer[] ls = new Integer[9];
 		ls[0] = 3;
@@ -75,6 +75,6 @@ public class MergeSort<T extends Comparable> implements ISort<T> {
 			System.out.println(ls[i]);
 		}
 	}
-	
+	*/
 	
 }
