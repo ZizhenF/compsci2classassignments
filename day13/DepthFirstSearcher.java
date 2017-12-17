@@ -30,7 +30,7 @@ public class DepthFirstSearcher<N,W> implements ISearcher<N,W> {
 		}
 		else {
 			//find the neighbours of s
-			INode<N>[] nbls = g.getNeighbors(s);
+			INode<N>[] nbls = g.getNbsFrIt(s);
 			visited.append(s);
 			for (int i=0; i<nbls.length; i++) {
 				if (this.inList(visited,nbls[i])==false) {
@@ -61,7 +61,7 @@ public class DepthFirstSearcher<N,W> implements ISearcher<N,W> {
 		}
 		else {
 			//find the neighbours of s
-			INode<N>[] nbls = g.getNeighbors(s);
+			INode<N>[] nbls = g.getNbsFrIt(s);
 			visited.append(s);
 			IList<INode<N>> newpath = new ArrayList<INode<N>>();
 			for (int i=0;i<path.size();i++) {
@@ -84,9 +84,9 @@ public class DepthFirstSearcher<N,W> implements ISearcher<N,W> {
 		IGraphReader reader = new DiGraphReader();
 		gr = reader.read("graphfile.cs2");
 		INode<String>[] nodels = gr.getNodeSet();
-		System.out.println(nodels[4].getValue()+nodels[5].getValue());
-		System.out.println(searcher.pathExists(gr,nodels[4],nodels[5]));
-		IList<INode<String>> path = searcher.getPath(gr,nodels[4],nodels[5]);
+		System.out.println(nodels[1].getValue()+nodels[4].getValue());
+		System.out.println(searcher.pathExists(gr,nodels[1],nodels[4]));
+		IList<INode<String>> path = searcher.getPath(gr,nodels[1],nodels[4]);
 		for (int i=0;i<path.size();i++) {
 			System.out.println(path.fetch(i).getValue());
 		}

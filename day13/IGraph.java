@@ -8,6 +8,10 @@ public interface IGraph<N, W> {
      */
     public INode<N>[] getNodeSet();
     
+
+    public INode<N>[] getNbsToIt(INode<N> n);
+
+    public INode<N>[] getNbsFrIt(INode<N> n);
     /**
      * An array of the neighbors of a node
      * @param n the node

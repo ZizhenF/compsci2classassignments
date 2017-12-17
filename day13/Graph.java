@@ -14,6 +14,32 @@ public class Graph<N,W> implements IGraph<N,W> {
 		return set;
 	}
 
+	public INode<N>[] getNbsToIt(INode<N> n) {
+		ArrayList<INode<N>> neighbors = new ArrayList<INode<N>>();
+		for (int i=0; i<edges.size(); i++) {
+			if ((edges.fetch(i)).getDestination()==n) {
+				neighbors.append((edges.fetch(i)).getSource());
+			}
+		}
+		Object[] oa = neighbors.getarray();
+		INode<N>[] set = (INode<N>[])new INode[oa.length];
+		for(int i=0;i<oa.length;i++) { set[i]=(INode<N>)oa[i]; }
+		return set;
+	}
+
+	public INode<N>[] getNbsFrIt(INode<N> n) {
+		ArrayList<INode<N>> neighbors = new ArrayList<INode<N>>();
+		for (int i=0; i<edges.size(); i++) {
+			if ((edges.fetch(i)).getSource()==n) {
+				neighbors.append((edges.fetch(i)).getDestination());
+			}
+		}
+		Object[] oa = neighbors.getarray();
+		INode<N>[] set = (INode<N>[])new INode[oa.length];
+		for(int i=0;i<oa.length;i++) { set[i]=(INode<N>)oa[i]; }
+		return set;
+	}
+
 	public INode<N>[] getNeighbors(INode<N> n) {
 		ArrayList<INode<N>> neighbors = new ArrayList<INode<N>>();
 		for (int i=0; i<edges.size(); i++) {
