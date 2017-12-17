@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 
 public class DepthFirstSearcher<N,W> implements ISearcher<N,W> {
 	boolean exist;
+	IList<INode<N>> ndpath;
 	public DepthFirstSearcher() {};
 
 	public boolean inList(IList<INode<N>> visited, INode<N> item) {
@@ -41,75 +42,41 @@ public class DepthFirstSearcher<N,W> implements ISearcher<N,W> {
 		return;
 	}
 
-	/*
 	public IList<INode<N>> getPath(IGraph<N,W> g, INode<N> s, INode<N> e) {
-		IList<INode<N>> path = new ArrayList<INode<N>>();
-		IList<INode<N>> visited = new ArrayList<INode<N>>();
-		path = this.helper2(path,visited,g,s,e);
-		return path;
-	}
-
-	public IList<INode<N>> helper2(IList<INode<N>> path, IList<INode<N>> visited, IGraph<N,W> g, INode<N> s, INode<N> e) {
-		if (s==e) {
-			path.append(s);
-			return path;
-		}
-		else {
-			visited.append(s);
-			IList<INode<N>> newpath = new ArrayList<INode<N>>();
-			for(int i=0; i<path.size();i++) {
-				newpath.append(path.fetch(i));
-			}
-			newpath.append(s);
-			INode<N>[] nbls = g.getNeighbors(s);
-			for (int i=0; i<nbls.length; i++) {
-				this.helper2(newpath,visited,g,nbls[i],e);
-			}
-		}
-		return null;
-	}
-	*/
-
-public IList<INode<N>> getPath(IGraph<N,W> g, INode<N> s, INode<N> e) {
 		IList<INode<N>> visited = new ArrayList<INode<N>>();
 		IList<INode<N>> path = new ArrayList<INode<N>>();
-		exist = false;
 		this.helper2(path,visited,g,s,e);
-		if (path.size()==0) {
+		if (ndpath==null) {
 			return null;
 		}
-		//now the path is in reversed order
-		//reverse the order, get rid of path[0]
-		IList<INode<N>> temp = new ArrayList<INode<N>>();
-		for (int i = path.size()-2;i>=0;i--) {
-			temp.append(path.fetch(i));
-		}
-		path = temp;
-		return path;
+		ndpath.remove(0);
+		return ndpath;
 	}
 
 	public void helper2(IList<INode<N>> path, IList<INode<N>> visited, IGraph<N,W> g, INode<N> s, INode<N> e) {
 		if (s==e) {
-			exist = true;
 			path.append(s);
+			ndpath = path;
 			return;
 		}
 		else {
 			//find the neighbours of s
 			INode<N>[] nbls = g.getNeighbors(s);
 			visited.append(s);
+			IList<INode<N>> newpath = new ArrayList<INode<N>>();
+			for (int i=0;i<path.size();i++) {
+				newpath.append(path.fetch(i));
+			}
+			newpath.append(s);
 			for (int i=0; i<nbls.length; i++) {
 				if (this.inList(visited,nbls[i])==false) {
-					this.helper2(path, visited,g,nbls[i],e);
-					if (exist==true) {
-						path.append(s);
-					}
+					this.helper2(newpath,visited,g,nbls[i],e);
 				}
 			}
 		}
 		return;
 	}
-	
+
 	
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		DepthFirstSearcher<String,Double> searcher = new DepthFirstSearcher<String,Double>();
@@ -117,8 +84,9 @@ public IList<INode<N>> getPath(IGraph<N,W> g, INode<N> s, INode<N> e) {
 		IGraphReader reader = new DiGraphReader();
 		gr = reader.read("graphfile.cs2");
 		INode<String>[] nodels = gr.getNodeSet();
-		System.out.println(nodels[1].getValue()+nodels[4].getValue());
-		IList<INode<String>> path = searcher.getPath(gr,nodels[1],nodels[4]);
+		System.out.println(nodels[4].getValue()+nodels[5].getValue());
+		System.out.println(searcher.pathExists(gr,nodels[4],nodels[5]));
+		IList<INode<String>> path = searcher.getPath(gr,nodels[4],nodels[5]);
 		for (int i=0;i<path.size();i++) {
 			System.out.println(path.fetch(i).getValue());
 		}
