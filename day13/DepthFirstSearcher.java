@@ -79,14 +79,24 @@ public class DepthFirstSearcher<N,W> implements ISearcher<N,W> {
 
 	
 	public static void main(String[] args) throws FileNotFoundException, IOException {
-		DepthFirstSearcher<String,Double> searcher = new DepthFirstSearcher<String,Double>();
+		ISearcher<String,Double> searcher = new DepthFirstSearcher<String,Double>();
 		IGraph<String,Double> gr = new Graph<String,Double>();
 		IGraphReader reader = new DiGraphReader();
-		gr = reader.read("graphfile.cs2");
+		gr = reader.read("custom_graphfile.cs2");
 		INode<String>[] nodels = gr.getNodeSet();
-		System.out.println(nodels[1].getValue()+nodels[4].getValue());
-		System.out.println(searcher.pathExists(gr,nodels[1],nodels[4]));
-		IList<INode<String>> path = searcher.getPath(gr,nodels[1],nodels[4]);
+		INode<String> start = null;
+		INode<String> end = null;
+		for (int i=0;i<nodels.length;i++) {
+			if (nodels[i].getValue().equals("start")) {
+				start = nodels[i];
+			}
+			if (nodels[i].getValue().equals("end")) {
+				end = nodels[i];
+			}
+		}
+		System.out.println(start.getValue()+end.getValue());
+		System.out.println(searcher.pathExists(gr,start,end));
+		IList<INode<String>> path = searcher.getPath(gr,start,end);
 		for (int i=0;i<path.size();i++) {
 			System.out.println(path.fetch(i).getValue());
 		}

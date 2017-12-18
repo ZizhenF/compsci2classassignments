@@ -20,5 +20,5 @@ public interface ISearcher<N,W> {
      * @param e node to end at
      * @return the list of nodes in the path
      */
-    //public IList<INode<N>> getPath(IGraph<N,W> g, INode<N> s, INode<N> e);
+    public IList<INode<N>> getPath(IGraph<N,W> g, INode<N> s, INode<N> e);
 }
